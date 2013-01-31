@@ -5,19 +5,40 @@ newTrafficGrid = function(nrow,ncol) {
     return(x)
 }
 
-generateBMLgrid = function(nrow,ncol,prob) {
+
+generateBMLgrid = function(nrow,ncol,nred,nblue) {
+    ## the dimension of the grid
+    bmldim = c(nrow,ncol)
+
+    ## randomly sample from nrow*ncol to get the correct number of red and blue cars
     n = nrow*ncol
-    data = sample(c(0,1,-1),size=n,prob=c(1-prob,prob/2,prob/2),replace=TRUE)
-    x = matrix(data,nrow=nrow,ncol=ncol)
-    redval = which(x==-1)
-    blueval = which(x==1)
-    obj = list()
-    obj$matrix = x
-    obj$red = redval
-    obj$blue = blueval
+    ncars = nred+nblue
+    ## 1. randomly get ncars 2. of ncars, select the red ones 3. set
+    ## the rest to be blue
+    cars = sample(1:n,ncars)  
+    redcars = sample(cars,nred)
+    bluecars = cars[!(cars %in% redcars)]
+
+    obj = list(dim=bmldim,redcars=redcars,bluecar=bluecars)
     class(obj) = "BMLgrid"
     return(obj)
 }
+    
+
+
+## generateBMLgrid = function(nrow,ncol,prob) {
+##     n = nrow*ncol
+##     data = sample(c(0,1,-1),size=n,prob=c(1-prob,prob/2,prob/2),replace=TRUE)
+##     x = matrix(data,nrow=nrow,ncol=ncol)
+##     redval = which(x==-1)
+##     blueval = which(x==1)
+##     obj = list()
+##     obj$matrix = x
+##     obj$red = redval
+##     obj$blue = blueval
+##     class(obj) = "BMLgrid"
+##     return(obj)
+## }
 
 
 changeCarProb = function(bgrid,prob) {
