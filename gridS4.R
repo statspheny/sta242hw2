@@ -1,5 +1,6 @@
 ## This is a BMLgrid object
-setClass("BMLgrid",representation(dim="integer",redcars="integer",bluecars="integer"),
+setClass("BMLgrid",representation(dim="integer",
+                                  redcars="integer",bluecars="integer"),
          prototype(dim=c(0L,0L),redcars=NULL,bluecars=NULL))
 
 
@@ -74,17 +75,20 @@ setMethod("updateBlue","BMLgrid",
     
               nrow = dim(obj)[1]
               blueOld = bluecars(obj)
-              print("blueOld")
-              print(blueOld)
+
 
               ## Move each car up by 1 spot
               ## If car is at top, then add nrow, move to end of line
               blueMove = blueOld-1 + as.integer(blueOld%%nrow==1)*nrow
-              print("blueMove")
-              print(blueMove)
 
-              print(blueOld-1)
-              print(as.integer(blueOld%%nrow==1)*nrow)
+              ## For debugging purposes
+              ## print("blueOld")
+              ## print(blueOld)
+              ## print("blueMove")
+              ## print(blueMove)
+
+              ## print(blueOld-1)
+              ## print(as.integer(blueOld%%nrow==1)*nrow)
 
               ## stuck cars do not move, because there is already some
               ## blue or red cars in their place
@@ -93,9 +97,10 @@ setMethod("updateBlue","BMLgrid",
 
               ## update the blue cars
               obj@bluecars = as.integer(blueMove)
+
               return(obj)
           })
-    
+
 setGeneric("updateRed", function(obj,...) standardGeneric("updateRed"))
 
 setMethod("updateRed","BMLgrid",
@@ -106,17 +111,19 @@ setMethod("updateRed","BMLgrid",
               nrow = d[1]
               n = d[1]*d[2]
               redOld = redcars(obj)
-              print("redOld")
-              print(redOld)
 
               ## Move each car right 1 spot, so nrow spaces
               ## If car is at the end, move to first line
               redMove = (redOld+nrow)
-              redMove[redMove>100] = redMove[redMove>100]-100
-              print("redMove")
-              print(redMove)
-              print(nrow)
-              print(n)
+              redMove[redMove>n] = redMove[redMove>n]-n
+
+              ## For debugging purposes
+              ## print("redOld")
+              ## print(redOld)
+              ## print("redMove")
+              ## print(redMove)
+              ## print(nrow)
+              ## print(n)
 
               ## stuck cars do not move
               stuckCars = checkIfCarStuck(redMove, c(obj@redcars,obj@bluecars))
@@ -124,7 +131,39 @@ setMethod("updateRed","BMLgrid",
 
               ## update the red cars
               obj@redcars = as.integer(redMove)
+
               return(obj)
           })
+
+
+setMethod("summary","BMLgrid",
+          function(object,...) {
+              cat("BMLgrid:\n")
+              cat(paste("dim:",object@dim[1],"x",object@dim[2],"\n"))
+              cat(paste(length(object@bluecars),"blue cars\n"))
+              cat(paste(length(object@redcars),"red cars\n"))
+          })
+    
+
+setMethod("as.data.frame","BMLgrid",
+          function(x,...) {
+
+              brow = x@bluecars %% x@dim[1]
+              bcol = floor(x@bluecars / x@dim[2]) + 1
+              bn = length(x@bluecars)
+
+              rrow = x@redcars %% x@dim[1]
+              rcol = floor(x@redcars / x@dim[2]) + 1
+              rn = length(x@redcars)
+
+              df = data.frame(color=c(rep("blue",bn),rep("red",rn)),
+                row=c(brow,rrow),
+                col=c(bcol,rcol))
+          })
+              
+
+checkMoves = function(oldPlace,newPlace) {
+    newPlace-oldPlace
+}
 
 
