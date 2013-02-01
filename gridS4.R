@@ -43,7 +43,7 @@ setMethod("plot","BMLgrid",
               white = "#FFFFFFFF"
               blue = "#0000FFFF"
 
-              image(shiftedmat,col=c(red,white,blue),xaxt='n',yaxt='n')
+              image(shiftedmat,col=c(red,white,blue),xaxt='n',yaxt='n',...)
           })
 
 checkIfCarStuck = function(toMove,filledSpots) {
@@ -166,4 +166,63 @@ checkMoves = function(oldPlace,newPlace) {
     newPlace-oldPlace
 }
 
+getVelocity = function(oldPlace,newPlace) {
+    if(length(oldPlace)!=length(newPlace))
+      stop("oldPlace and newPlace different lengths")
+    return(sum(oldPlace!=newPlace)/length(oldPlace))
+}
 
+
+## updateManySteps = function(obj,numsteps) {
+##     ## This function updates the BMLgrid many steps
+
+##     ## for every two steps, update blue, then update red
+##     for(i in 1:floor(numsteps/2)) {
+##         obj = updateBlue(obj)
+##         obj = updateRed(obj)
+##     }
+
+##     ## if numsteps is odd, then update blue again, else, finish
+##     if(!numsteps%%2) 
+##         obj = updateBlue(obj)
+
+##     return(obj)
+## }
+
+
+updateManySteps = function(obj,numsteps,video=FALSE) {
+    ## This function updates the BMLgrid many steps
+    ## Blue moves first
+
+    if(class(obj)!="BMLgrid")
+      stop('not BMLgrid')
+
+    if(video)
+      plot(obj)
+   
+    toMove = "blue"
+
+    for(i in 1:numsteps) {
+
+        if(video) {
+            dev.hold()
+            Sys.sleep(1)
+        }
+
+        if(toMove=="blue") {
+          obj=updateBlue(obj)
+          toMove="red"
+        } else if(toMove=="red") {
+          obj = updateRed(obj)
+          toMove="blue"
+        }
+
+        if(video) {
+            plot(obj)
+            dev.flush()
+        }
+    }
+
+    return(obj)
+
+}

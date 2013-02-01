@@ -23,41 +23,51 @@ for(i in 1:4) {
 
 
 ## Test with different parameters
-par(mfrow=c(1,1),mar=c(1,1,1,1))
+par(mfrow=c(1,1))
 
 set.seed(100)
-x = generateBMLgrid(20,20,150,150)
+x = generateBMLgrid(20,20,10,10)
 plot(x)
 print(bluecars(x))
 print(redcars(x))
 
 # Test if blue car moves
-for(i in 1:20) {
+for(i in 1:5) {
     x=updateBlue(x)
     dev.hold()
     Sys.sleep(1)
     frame()
-    plot(x)
+    plot(x,main=paste("step",i))
+#    plot(x)
     dev.flush()
-    ##print(bluecars(x))
-    print(x@bluevel)
+    print(bluecars(x))
+    
     
     x=updateRed(x)
     dev.hold()
     Sys.sleep(1)
     frame()
-    plot(x)
+    plot(x,main=paste("step i"))
+#    plot(x)
     dev.flush()
-    print(x@redvel)
     
-    ##print(redcars(x))
+    print(redcars(x))
 }
 
 
 
 source("gridS4.R")
 set.seed(100)
-x = generateBMLgrid(20,20,10,10)
+y = generateBMLgrid(20,20,10,10)
+print(redcars(y))
+print(bluecars(y))
+
+y = updateManySteps(y,10)
+print(redcars(y))
+print(bluecars(y))
+
+y = updateManySteps(y,20,video=TRUE)
+
 
 ## Test to make sure it works
 ## set random seeds
