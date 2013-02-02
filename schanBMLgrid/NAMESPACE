@@ -1,0 +1,14 @@
+exportPattern("^[[:alpha:]]+")
+exportMethods(
+    "as.data.frame",
+    "bluecars",
+    "getdim",
+    "plot",
+    "redcars",
+    "summary",
+    "updateBlue",
+    "updateRed" 
+)
+exportClasses(
+    "BMLgrid" 
+)

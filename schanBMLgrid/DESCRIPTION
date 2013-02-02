@@ -1,0 +1,10 @@
+Package: schanBMLgrid
+Type: Package
+Title: create implementation of Biham-Middleton-Levine Traffic Model
+Version: 1.0
+Date: 2013-02-01
+Author: Stephanie Chan
+Maintainer: Stephanie Chan <stechan@ucdavis.edu>
+Description: creates a BML grid and updates the grid according to traffic rules.
+License: What license is it under?
+Depends: methods
