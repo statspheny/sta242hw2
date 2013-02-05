@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   %%  ~~function to do ... ~~
-  get average velocity of cars
+  Get car velocity
 }
 \description{
   %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -49,26 +49,12 @@ getVelocity(oldPlace, newPlace)
 
 \seealso{
   %% ~~objects to See Also as \code{\link{help}}, ~~~
-  \code{\link{BMLgrid}},\code{\link{updateBlue}},\code{\link{updateRed}},\code{\link{updateManySteps}}
+  \code{\link{BMLgrid-class}},\code{\link{updateBlue}},\code{\link{updateRed}},\code{\link{updateManySteps}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (oldPlace, newPlace) 
-{
-    if (length(oldPlace) != length(newPlace)) 
-        stop("oldPlace and newPlace different lengths")
-    return(sum(oldPlace != newPlace)/length(oldPlace))
-  }
-
-
 x = generateBMLgrid(20,20,10,10)
 y = updateRed(x)
 getVelocity(redcars(x),redcars(y))
-
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

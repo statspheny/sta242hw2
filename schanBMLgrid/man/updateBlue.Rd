@@ -50,20 +50,9 @@ updateBlue(obj, ...)
 
 \seealso{
   %% ~~objects to See Also as \code{\link{help}}, ~~~
-  \code{\link{updateRed}},\code{\link{updateMany}}
+  \code{\link{updateRed}},\code{\link{updateManySteps}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-structure(function (obj, ...) 
-standardGeneric("updateBlue"), generic = structure("updateBlue", package = "schanBMLgrid"), package = "schanBMLgrid", group = list(), valueClass = character(0), signature = "obj", default = `\001NULL\001`, skeleton = function (obj, 
-    ...) 
-stop("invalid call in method dispatch to 'updateBlue' (no default method)", 
-    domain = NA)(obj, ...), class = structure("standardGeneric", package
-= "methods"))
 
 x = generateBMLgrid(20,20,10,10)
 plot(x)

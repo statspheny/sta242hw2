@@ -22,8 +22,17 @@ Date: \tab 2013-02-01\cr
 License: \tab What license is it under?\cr
 Depends: \tab methods\cr
 }
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
+The main functions in this package are \code{generateBMLgrid} which will
+generate a \code{BMLgrid} object.  The dimensions and the cars in the
+grid can be seen using \code{summary}, or
+\code{getdim}, \code{redcars}, \code{bluecars}.  \code{plot} plots the
+\code{BMLgrid} as an image.  \code{updateBlue},\code{updateRed} will
+update either the blue or red cars by one time step.  At each time step,
+the blue cars will move up by one unless they are blocked, and the red
+cars will move right by one unless they are blocked.  They wrap around
+when they get to the edge of the grid.
+\code{updateManySteps} will update the cars by several steps.
+
 }
 \author{
 Stephanie Chan
@@ -40,7 +49,7 @@ Maintainer: Stephanie Chan <stechan@ucdavis.edu>
 \keyword{ package }
 \seealso{
 %% ~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+%% ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
 %% ~~ simple examples of the most important functions ~~

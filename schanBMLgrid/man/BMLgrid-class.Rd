@@ -24,11 +24,11 @@ Objects can be created by calls of the form \code{new("BMLgrid", ...)}.
 }
 \section{Slots}{
   \describe{
-    \item{\code{dim}:}{Object of class \code{"integer"} ~~ This is the
+    \item{\code{dim}:}{Object of class \code{"integer"} This is the
       dimension of the BMLgrid object.  The size of the traffic grid. }
-    \item{\code{redcars}:}{Object of class \code{"integer"} ~~ This is a
+    \item{\code{redcars}:}{Object of class \code{"integer"} This is a
     list of all the red cars in the BMLgrid object.}
-    \item{\code{bluecars}:}{Object of class \code{"integer"} ~~ This is
+    \item{\code{bluecars}:}{Object of class \code{"integer"} This is
       a list of all the blue cars in the BMLgrid object.}
   }
 }

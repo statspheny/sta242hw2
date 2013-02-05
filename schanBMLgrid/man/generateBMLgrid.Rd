@@ -3,13 +3,13 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   %%  ~~function to do ... ~~
-  ~~This function generates a BMLgrid.~~
+  Generate BMLgrid
 }
 \description{
   %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-  ~~This function generates a BMLgrid according to the \code{BMLgrid}
+  This function generates a BMLgrid according to the \code{BMLgrid}
   class.  It will create the BMLgrid by the parameters given in the
-  input.~~
+  input.
   
 }
 \usage{
@@ -19,19 +19,19 @@ generateBMLgrid(nrow, ncol, nred, nblue)
 \arguments{
   \item{nrow}{
     %%     ~~Describe \code{nrow} here~~
-    ~~number of rows in the \code{BMLgrid} object~~
+    number of rows in the \code{BMLgrid} object
 }
   \item{ncol}{
     %%     ~~Describe \code{ncol} here~~
-    ~~number of columns in the \code{BMLgrid} object~~
+    number of columns in the \code{BMLgrid} object
 }
   \item{nred}{
     %%     ~~Describe \code{nred} here~~
-    ~~number of red cars in the \code{BMLgrid} object~~
+    number of red cars in the \code{BMLgrid} object
 }
   \item{nblue}{
     %%     ~~Describe \code{nblue} here~~
-    ~~number of blue cars in the \code{BMLgrid} object~~
+    number of blue cars in the \code{BMLgrid} object
 }
 }
 \details{
@@ -50,7 +50,7 @@ Returns a \code{BMLgrid} object.
 }
 \author{
   %%  ~~who you are~~
-  ~~Stephanie Chan~~
+  Stephanie Chan
 }
 \note{
   %%  ~~further notes~~

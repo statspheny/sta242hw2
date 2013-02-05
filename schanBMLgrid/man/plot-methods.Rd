@@ -3,9 +3,13 @@
 \alias{plot-methods}
 \alias{plot,ANY-method}
 \alias{plot,BMLgrid-method}
-\title{ ~~ Methods for Function \code{plot}  ~~}
+\title{
+  %% ~~ Methods for Function \code{plot}  ~~
+  Plot BMLgrid
+}
 \description{
- ~~ Methods for function \code{plot}  ~~
+  Plots the \code{BMLgrid} as an image.
+ %%~~ Methods for function \code{plot}  ~~
 }
 \section{Methods}{
 \describe{

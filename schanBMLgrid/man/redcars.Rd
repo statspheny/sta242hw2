@@ -44,19 +44,9 @@ redcars(obj)
 
 \seealso{
   %% ~~objects to See Also as \code{\link{help}}, ~~~
-  \code{\link{BMLgrid}},\code{\link{bluecars}}
+  \code{\link{BMLgrid-class}},\code{\link{bluecars}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-structure(function (obj) 
-standardGeneric("redcars"), generic = structure("redcars", package = "schanBMLgrid"), package = "schanBMLgrid", group = list(), valueClass = character(0), signature = "obj", default = `\001NULL\001`, skeleton = function (obj) 
-stop("invalid call in method dispatch to 'redcars' (no default method)", 
-    domain = NA)(obj), class = structure("standardGeneric", package =
-"methods"))
 
 x = generateBMLgrid(20,20,10,10)
 plot(x)

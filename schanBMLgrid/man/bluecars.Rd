@@ -3,12 +3,12 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   %%  ~~function to do ... ~~
-  ~~ returns the bluecars of the object ~~
+  returns bluecars
 }
 \description{
   %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-  ~~ This function returns the list of all the blue cars in the format
-  it is stored. ~~
+  This function returns the list of all the blue cars in the format
+  it is stored.
 }
 \usage{
 bluecars(obj, ...)
@@ -17,7 +17,7 @@ bluecars(obj, ...)
 \arguments{
   \item{obj}{
     %%     ~~Describe \code{obj} here~~
-    ~~ \code{obj} must be a BMLgrid object ~~
+    \code{obj} must be a BMLgrid object
 }
   \item{\dots}{
 %%     ~~Describe \code{\dots} here~~
@@ -39,7 +39,7 @@ bluecars(obj, ...)
 }
 \author{
   %%  ~~who you are~~
-  ~~ Stephanie Chan ~~
+  Stephanie Chan
 }
 \note{
 %%  ~~further notes~~
@@ -49,21 +49,9 @@ bluecars(obj, ...)
 
 \seealso{
   %% ~~objects to See Also as \code{\link{help}}, ~~~
-  \code{\link{BMLgrid}},\code{\link{redcars}}
+  \code{\link{BMLgrid-class}},\code{\link{redcars}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-structure(function (obj, ...) 
-standardGeneric("bluecars"), generic = structure("bluecars", package = "schanBMLgrid"), package = "schanBMLgrid", group = list(), valueClass = character(0), signature = "obj", default = `\001NULL\001`, skeleton = function (obj, 
-    ...) 
-stop("invalid call in method dispatch to 'bluecars' (no default method)", 
-    domain = NA)(obj, ...), class = structure("standardGeneric", package
-= "methods"))
-
 x = generateBMLgrid(20,20,10,10)
 plot(x)
 bluecars(x)

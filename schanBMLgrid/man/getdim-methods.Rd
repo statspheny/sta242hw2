@@ -2,15 +2,16 @@
 \docType{methods}
 \alias{getdim-methods}
 \alias{getdim,BMLgrid-method}
-\title{ ~~ Methods for Function \code{getdim}  ~~}
+\title{Methods for Function \code{getdim}}
 \description{
- ~~ Methods for function \code{getdim}  ~~
+ Get the dimension of \code{BMLgrid}
 }
 \section{Methods}{
 \describe{
 
 \item{\code{signature(obj = "BMLgrid")}}{
-%%  ~~describe this method here~~
+  %%  ~~describe this method here~~
+  Get dimension of the \code{BMLgrid}
 }
 }}
 \keyword{methods}

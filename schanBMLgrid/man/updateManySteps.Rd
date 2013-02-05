@@ -60,38 +60,6 @@ updateManySteps(obj, numsteps, video = FALSE)
   \code{\link{updateBlue}},\code{\link{updateRed}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (obj, numsteps, video = FALSE) 
-{
-    if (class(obj) != "BMLgrid") 
-        stop("not BMLgrid")
-    if (video) 
-        plot(obj)
-    toMove = "blue"
-    for (i in 1:numsteps) {
-        if (video) {
-            dev.hold()
-            Sys.sleep(1)
-        }
-        if (toMove == "blue") {
-            obj = updateBlue(obj)
-            toMove = "red"
-        }
-        else if (toMove == "red") {
-            obj = updateRed(obj)
-            toMove = "blue"
-        }
-        if (video) {
-            plot(obj)
-            dev.flush()
-        }
-    }
-    return(obj)
-  }
 
 y = generateBMLgrid(20,20,10,10)
 print(redcars(y))
