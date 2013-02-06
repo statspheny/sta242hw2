@@ -1,0 +1,112 @@
+#+TITLE: Homework 2 Report
+#+AUTHOR: Stephanie Chan
+#+DATE: February 4, 2013
+#+LATEX_HEADER: \usepackage{verbatim}
+
+* Create a package for BML grid.
+  The BMLgrid package is in schanBMLgrid. More detail can be found in
+  the package manual.
+** Class:
+   The BMLgrid class has slots for dimension (the dimension of the
+   grid), redcars (the location of the red cars), and bluecars (the
+   location of the blue cars).  The BMLgrid is implemented using an S4
+   class.  The dimension is a size 2 integer array for the dimension
+   of the grid.  The red cars and blue cars is a vector of integers
+   determining the location.  The location is given by the single
+   integer value of the location of the grid as a matrix.  ie. A
+   location at column $x$ and row $y$ would be given by
+   $(x-1)$*numrows + $y$.
+** Functions:
+*** generateBMLgrid
+    This function generates a new BMLgrid with the specified dimension
+    and specified number of red cars and blue cars each
+*** plot
+    This function is from the general method plot and it creates an
+    image plot showing all the red cars and blue cars.
+*** checkIfCarStuck
+    This is a helper function used by updateRed and updateBlue to
+    check if there is a car in the way before a filled spot
+*** getdim/redcars/bluecars
+    These functions return the slots in the BMLgrid class
+*** updateRed/updateBlue
+    These functions move the red cars or the blue cars.  In order to
+    make these functions faster the numbers are updated by adding or
+    subtracting the number of spaces to move right by one column
+    (adding the row number) or up by one row (subtracting one).  The
+    positions that are at the edges, are taken the modular of in order
+    to cycle to the other side of the grid.
+*** summary
+    Returns the dimension of the grid and the number of red and blue
+    cars on the grid.
+*** as.data.frame
+    Returns the cars in the grid object as a data frame with each row
+    representing one car and columns of color, row, column of current location.
+*** checkMoves
+    Helper function used to check if the cars were moved.
+*** getVelocity
+    Function to compute average velocity of all cars by number of cars
+    moved divided by the total number of cars.
+*** updateManySteps
+    This function will move the car multiple steps.  There is a video
+    flag which will display a video of the cars moving.
+
+* R profile and timing
+  The time was saved in car movement by moving each of the cars by
+  representing each car by a single number to represent the location
+  in the matrix and using vectorized numeric operations such as adding
+  to move the car.  The %in% function was used to check if the car was
+  allowed to move.
+
+  The R profile results come from a 100x100 grid with 200 red cars and
+  200 blue cars.  These cars were moved through 100 time steps.
+
+** R profile results
+#+BEGIN_SRC R
+
+> summaryRprof("Rprof.out")
+$by.self
+                  self.time self.pct total.time total.pct
+"loadMethod"           0.08    57.14       0.10     71.43
+"checkIfCarStuck"      0.02    14.29       0.04     28.57
+"assign"               0.02    14.29       0.02     14.29
+"match"                0.02    14.29       0.02     14.29
+
+$by.total
+                  total.time total.pct self.time self.pct
+"standardGeneric"       0.14    100.00      0.00     0.00
+"updateManySteps"       0.14    100.00      0.00     0.00
+"loadMethod"            0.10     71.43      0.08    57.14
+"updateBlue"            0.08     57.14      0.00     0.00
+"updateRed"             0.06     42.86      0.00     0.00
+"checkIfCarStuck"       0.04     28.57      0.02    14.29
+"assign"                0.02     14.29      0.02    14.29
+"match"                 0.02     14.29      0.02    14.29
+"bluecars"              0.02     14.29      0.00     0.00
+"%in%"                  0.02     14.29      0.00     0.00
+
+$sample.interval
+[1] 0.02
+
+$sampling.time
+[1] 0.14
+
+#+END_SRC
+* Checking Velocity as \rho changes
+  We vary the density of cars in the grid and the velocities will
+  change with it.  These tests were done on a 100 by 100 grid with car
+  densities of $\rho=0.1,0.2,0.3,\ldots,0.9,1.0$, and equal red and
+  blue cars.  For $\rho\leq0.3$, the average velocity of the cars tend
+  to one, and the traffic jams occur in the beginning.  For
+  $\rho>0.5$, the cars are quickly congested and there is little
+  velocity and freedom to move.  At $\rho=0.4$ and $\rho=0.5$, the
+  trend is also toward getting stuck after enough time passes.
+[[file:./velocity.pdf]]
+
+#+LATEX: \clearpage
+
+* Appendix
+** gridS4.R
+#+LATEX: \verbatiminput{gridS4.R}
+** testgrid.R
+#+LATEX: \verbatiminput{testgrid.R}
+
