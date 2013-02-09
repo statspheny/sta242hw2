@@ -114,3 +114,14 @@ rho = rep(1:10*0.1,each=50)
 pdf("velocity.pdf")
 xyplot(averageVelocities~times|as.factor(rho),groups=rho,main="Average Velocity for Grid Densities")
 dev.off()
+
+
+dyn.load("RMoveCars.so")
+is.loaded("RupdateBlueCarsCRoutine")
+
+set.seed(100)
+x = generateBMLgrid(5,5,5,5)
+bluecars(x)
+
+y = updateBlueWithC(x)
+bluecars(y)

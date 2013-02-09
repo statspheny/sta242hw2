@@ -3,11 +3,11 @@ is.loaded("RupdateBlueCarsCRoutine")
 
 updateBlueWithC = function(obj) {
     dim = getdim(obj)
-    objblue = bluecars(obj)
-    objred = redcars(obj)
+    objblue = as.integer(bluecars(obj))
+    objred = as.integer(redcars(obj))
     numBlue = length(objblue)
     numRed = length(objred)
-    newBluecars = numeric(numBlue)
+    #newBluecars = integer(numBlue)
     
     newBluecars = .C("RupdateBlueCarsCRoutine",
       dim[1],
@@ -16,12 +16,14 @@ updateBlueWithC = function(obj) {
       objblue,
       numRed,
       objred,
-      ans = newBluecars)$ans
+      ans = integer(numBlue))$ans
 
+    print("oldblue")
     print(objblue)
+    print("newblue")
     print(newBluecars)
 
-    obj@bluecars = newBluecars
+    #obj@bluecars = newBluecars
 
     return(obj)
 }
