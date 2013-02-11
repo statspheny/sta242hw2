@@ -18,6 +18,7 @@ updateBlueWithC = function(obj) {
       objred,
       ans = integer(numBlue))$ans
 
+    # for debugging purposes
     print("oldblue")
     print(objblue)
     print("newblue")
@@ -28,3 +29,30 @@ updateBlueWithC = function(obj) {
     return(obj)
 }
 
+
+updateRedWithC = function(obj) {
+    dim = getdim(obj)
+    objblue = as.integer(bluecars(obj))
+    objred = as.integer(redcars(obj))
+    numBlue = length(objblue)
+    numRed = length(objred)
+
+    newRedcars = .C("RupdateRedCarsCRoutine",
+      dim[1],
+      dim[2],
+      numBlue,
+      objblue,
+      numRed,
+      objred,
+      ans = integer(numRed))$ans
+
+    # for debugging purposes
+    print("oldred")
+    print(objred)
+    print("newred")
+    print(newRedcars)
+
+    obj@redcars = newRedcars
+
+    return(obj)
+}

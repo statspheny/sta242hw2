@@ -63,7 +63,7 @@ updateRedCarsCRoutine(int dimRow,
 {
 
 	for(int i=0; i<numRedcars; i++) {
-		newRedcars[i] = moveOneRedCar(redcars[i],dimCol,
+		newRedcars[i] = moveOneRedCar(redcars[i],dimRow,dimCol,
 										numBluecars,bluecars,numRedcars,redcars);
 	}
 
@@ -134,7 +134,7 @@ moveOneRedCar(int oldPosition,
 	//the total size of the grid.
 
 	int totalSize = dimRow * dimCol;
-	if( (newPosition > totalSize) {
+	if( newPosition > totalSize ) {
 		newPosition = newPosition - totalSize;
 	}
 
