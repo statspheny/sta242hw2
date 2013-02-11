@@ -23,7 +23,7 @@ updateBlueWithC = function(obj) {
     print("newblue")
     print(newBluecars)
 
-    #obj@bluecars = newBluecars
+    obj@bluecars = newBluecars
 
     return(obj)
 }
