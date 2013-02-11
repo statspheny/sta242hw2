@@ -1,5 +1,8 @@
-dyn.load("RMoveCars.so")
+#dyn.load("RMoveCars.so")
 is.loaded("RupdateBlueCarsCRoutine")
+## if(!is.loaded("RupdateBlueCarsCRoutine") {
+##     error("RupdateBlueCarsCRoutine not loaded")
+## }
 
 ## function to updateBlue using C function
 updateBlueWithC = function(obj) {
