@@ -77,7 +77,10 @@ testRandomResult =sapply(1:100,testRandomGrid)
 
 
 ######################################################################
-## Here is a function to test if the 
+## Here is a function to test if the multistep grid function for C
+## works.
+
+
 
     
     

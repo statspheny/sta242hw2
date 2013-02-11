@@ -89,4 +89,8 @@ updateManyStepsWithC = function(obj,numSteps) {
     ## update object
     obj@bluecars = newBlue
     obj@redcars = newRed
+
+    return(obj)
+}
+   
       
