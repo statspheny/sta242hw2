@@ -1,3 +1,6 @@
+/*
+  This is the file of wrappers for all the functions in order to pass the correct values to R.
+ */
 #include "moveCars.h"
 
 void
@@ -34,3 +37,19 @@ RupdateRedCarsCRoutine(int *dimRow,
 
 }
 							
+
+void
+RupdateManyStepsCRoutine(int *dimRow, int *dimCol,
+						 int *numBluecars, int *bluecars,
+						 int *numRedcars, int *redcars,
+						 int *numMoves,
+						 int *newBluecars, int *newRedcars)
+{
+
+	updateManyStepsCRoutine(*dimRow, *dimCol,
+							*numBluecars, bluecars,
+							*numRedcars, redcars,
+							*numMoves,
+							newBluecars, newRedcars);
+
+}
