@@ -162,10 +162,6 @@ setMethod("as.data.frame","BMLgrid",
           })
               
 
-checkMoves = function(oldPlace,newPlace) {
-    newPlace-oldPlace
-}
-
 getVelocity = function(oldPlace,newPlace) {
     if(length(oldPlace)!=length(newPlace))
       stop("oldPlace and newPlace different lengths")
@@ -190,7 +186,7 @@ getVelocity = function(oldPlace,newPlace) {
 ## }
 
 
-updateManySteps = function(obj,numsteps,video=FALSE) {
+updateManySteps = function(obj,numSteps,video=FALSE) {
     ## This function updates the BMLgrid many steps
     ## Blue moves first
 
@@ -202,7 +198,7 @@ updateManySteps = function(obj,numsteps,video=FALSE) {
    
     toMove = "blue"
 
-    for(i in 1:numsteps) {
+    for(i in 1:numSteps) {
 
         if(video) {
             dev.hold()

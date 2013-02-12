@@ -1,4 +1,4 @@
-% Created 2013-02-11 Mon 20:47
+% Created 2013-02-11 Mon 22:13
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -47,8 +47,8 @@ I tested the C functions to check that they would give equivalent
 results as the methods in R.  These tests were done using a randomized
 grid with random dimensions and random number of cars.  I did this 100
 times and each time compared the result from C with the result from
-the previous function in R.  After the first two tries, the two
-functions returned the same grid.
+the previous function in R.  Each time, the two functions returned the
+same grid.
 \section{Check Rprofile for runtime}
 \label{sec-3}
 
@@ -165,8 +165,11 @@ $sampling.time
    to update the positions of the cars.
 
 \begin{verbatim}
-dyn.load("RMoveCars.so")
-is.loaded("RupdateBlueCarsCRoutine")
+##  dyn.load("RMoveCars.so")
+## is.loaded("RupdateBlueCarsCRoutine")
+## if(!is.loaded("RupdateBlueCarsCRoutine") {
+##     error("RupdateBlueCarsCRoutine not loaded")
+## }
 
 ## function to updateBlue using C function
 updateBlueWithC = function(obj) {
@@ -267,9 +270,10 @@ updateManyStepsWithC = function(obj,numSteps) {
    by R.
 
 \begin{verbatim}
-/*
-  This is the file of wrappers for all the functions in order to pass the correct values to R.
- */
+/***********************************************************************
+ * This is the file of wrappers for all the functions in order to pass *
+ * the correct values to R.                                            *
+ ***********************************************************************/
 #include "moveCars.h"
 
 void
@@ -330,20 +334,21 @@ RupdateManyStepsCRoutine(int *dimRow, int *dimCol,
 
 \begin{verbatim}
 
-/* C Routine to update the blue cars.
-   Called by RupdateCarsCRoutine
+/*********************************************************************/
+/*    C Routine to update the blue cars.                             */
+/*    Called by RupdateCarsCRoutine                                  */
+/*                                                                   */
+/*    Each blue car moves up by one space.                           */
+/*    INPUTS: int dimRow:       num of rows                          */
+/*            int dimCol:       num of columns                       */
+/*         int numBluecars:  num of bluecars                         */
+/*         int *bluecars:    pointer to the bluecars                 */
+/*         int numRedcars:   num of redcars                          */
+/*         int *redcars:     pointer to the redcars                  */
+/*         int *newBluecars: pointer to the newset of bluecars       */
+/*********************************************************************/
 
-   Each blue car moves up by one space.
-   INPUTS: int dimRow:       num of rows
-           int dimCol:       num of columns
-           int numBluecars:  num of bluecars
-           int *bluecars:    pointer to the bluecars
-           int numRedcars:   num of redcars
-           int *redcars:     pointer to the redcars
-           int *newBluecars: pointer to the newset of bluecars
 
-
- */
 void updateBlueCarsCRoutine(int dimRow, 
                             int dimCol,
                             int numBluecars,
@@ -352,19 +357,21 @@ void updateBlueCarsCRoutine(int dimRow,
                             int *redcars,
                             int *newBluecars);
 
-/* C Routine to update the red cars.
-   Called by RupdateredCarsCRoutine.
+/********************************************************************/
+/*    C Routine to update the red cars.                         */
+/*    Called by RupdateredCarsCRoutine.                             */
+/*                                                                  */
+/*    Each red car moves up by one space.                           */
+/*    INPUTS: int dimRow:       num of rows                         */
+/*            int dimCol:       num of columns                      */
+/*         int numBluecars:  num of bluecars                        */
+/*         int *bluecars:    pointer to the bluecars                */
+/*         int numRedcars:   num of redcars                         */
+/*         int *redcars:     pointer to the redcars                 */
+/*         int *newRedcars: pointer to the new set of redcars       */
+/********************************************************************/
 
-   Each red car moves up by one space.
-   INPUTS: int dimRow:       num of rows
-           int dimCol:       num of columns
-           int numBluecars:  num of bluecars
-           int *bluecars:    pointer to the bluecars
-           int numRedcars:   num of redcars
-           int *redcars:     pointer to the redcars
-           int *newRedcars: pointer to the new set of redcars
 
- */
 void updateRedCarsCRoutine(int dimRow,
                            int dimCol,
                            int numBluecars,
@@ -373,21 +380,21 @@ void updateRedCarsCRoutine(int dimRow,
                            int *redcars,
                            int *newRedcars);
 
-/* C Routine to update red and blue cars for multiple steps
-   Called by RupdateManyStepsCarsCRoutine.
-
-   Will alternately move blue and red cars  for numMoves number of moves
-   INPUTS: int dimRow:       num of rows
-           int dimCol:       num of columns
-           int numBluecars:  num of bluecars
-           int *nluecars:    pointer to the bluecars
-           int numRedcars:   num of redcars
-           int *redcars:     pointer to the redcars
-           int numMove:      num of moves to take
-           int *newBluecars: pointer to the new set of bluecars
-           int *newRedcars:  pointer to the newset of redcars
-
- */
+/*******************************************************************************/
+/*    C Routine to update red and blue cars for multiple steps                 */
+/*    Called by RupdateManyStepsCarsCRoutine.                                  */
+/*                                                                             */
+/*    Will alternately move blue and red cars  for numMoves number of moves    */
+/*    INPUTS: int dimRow:       num of rows                                    */
+/*            int dimCol:       num of columns                                 */
+/*         int numBluecars:  num of bluecars                                   */
+/*         int *nluecars:    pointer to the bluecars                           */
+/*         int numRedcars:   num of redcars                                    */
+/*         int *redcars:     pointer to the redcars                            */
+/*         int numMove:      num of moves to take                              */
+/*         int *newBluecars: pointer to the new set of bluecars                */
+/*         int *newRedcars:  pointer to the newset of redcars                  */
+/*******************************************************************************/
 void
 updateManyStepsCRoutine(int dimRow,       int dimCol,
                         int numBluecars,  int *bluecars,
@@ -397,9 +404,10 @@ updateManyStepsCRoutine(int dimRow,       int dimCol,
 
 
 
-/* C Routine to move single blue car and return new position.
-   Called by updateBlueCarsCRoutine.
-*/
+/****************************************************************/
+/*   C Routine to move single blue car and return new position. */
+/*    Called by updateBlueCarsCRoutine.                         */
+/****************************************************************/
 int moveOneBlueCar(int oldPosition,
                    int dimRow,
                    int numBluecars,
@@ -407,9 +415,10 @@ int moveOneBlueCar(int oldPosition,
                    int numRedcars,
                    int *redcars);
 
-/* C Routine to move single red car and return new position. 
-   Called by updateRedCarsCRoutine.
- */
+/****************************************************************/
+/*  C Routine to move single red car and return new position.   */
+/*    Called by updateRedCarsCRoutine.                          */
+/****************************************************************/
 int moveOneRedCar(int oldPosition,
                   int dimRow,
                   int dimCol,
@@ -419,9 +428,9 @@ int moveOneRedCar(int oldPosition,
                   int *redcars);
 
 
-/* Check if there is currently a car in the given position. 
-*/
-
+/*****************************************************************/
+/*   Check if there is currently a car in the given position.    */
+/*****************************************************************/
 int checkIsCarPositionTaken(int positionToCheck,
                             int numCarsInArray,
                             int *carArray);
@@ -432,33 +441,38 @@ int checkIsCarPositionTaken(int positionToCheck,
    This is the file that contains the code to move the cars.
 
 \begin{verbatim}
-////////////////////////////////////////////////////////////////////////////////
-// This file contains the following functions to move the cars
-// void updateBlueCarsCRoutine
-// void updateRedCarsCRoutine
-// int moveOneBlueCar
-// int moveOneRedCar
-// int checkIsCarPositionTake
-// void setArray
-// void updateManyStepsCRoutine
+
+/***************************************************************/
+/* This file contains the following functions to move the cars */
+/* void updateBlueCarsCRoutine                                 */
+/* void updateRedCarsCRoutine                                  */
+/* int moveOneBlueCar                                          */
+/* int moveOneRedCar                                           */
+/* int checkIsCarPositionTake                                  */
+/* void setArray                                               */
+/* void updateManyStepsCRoutine                                */
+/***************************************************************/
 
 #include "moveCars.h"
 #include <stdbool.h>
 
-////////////////////////////////////////////////////////////////////////////////
-// header files for private functions
+ /**************************************/
+ /* header files for private functions */
+ /**************************************/
 
 void
 setArray(int arraySize, int *arrayToUpdate, int *arrayWithValues);
 
 
-////////////////////////////////////////////////////////////////////////////////
-// Beginning of code
+ /*********************/
+ /* Beginning of code */
+ /*********************/
 
 
-/*  The function will change the values inside newBluecars to reflect
-    the changes of the new blue cars.
-*/
+/***************************************************************************/
+/*   The function will change the values inside newBluecars to reflect     */
+/*  the changes of the new blue cars.                                      */
+/***************************************************************************/
 void
 updateBlueCarsCRoutine(int dimRow, 
                        int dimCol,
@@ -487,10 +501,10 @@ updateBlueCarsCRoutine(int dimRow,
 }
 
 
-/* This function will update all the redcars and place the new
-   locations of the cars in the array newRedcars.
-*/
-
+ /***************************************************************/
+ /* This function will update all the redcars and place the new */
+ /* locations of the cars in the array newRedcars.              */
+ /***************************************************************/
 void
 updateRedCarsCRoutine(int dimRow, 
                       int dimCol,
@@ -512,9 +526,11 @@ updateRedCarsCRoutine(int dimRow,
 
 
 
-/* function to move a single blue car according to the rules.
-   This function returns the new location of the car as an integer.
- */
+ /**********************************************************************/
+ /* function to move a single blue car according to the rules.         */
+ /*   This function returns the new location of the car as an integer. */
+ /**********************************************************************/
+
 int
 moveOneBlueCar(int oldPosition,
                int dimRow,
@@ -551,10 +567,12 @@ moveOneBlueCar(int oldPosition,
 
 
 
-/* function to move a single red car according to the rules.  This
-   function returns the new location of the car as an integer. 
-   This function is called by updateRedCarsCRoutine.
-*/
+ /*******************************************************************/
+ /* function to move a single red car according to the rules.  This */
+ /* function returns the new location of the car as an integer.     */
+ /* This function is called by updateRedCarsCRoutine.               */
+ /*******************************************************************/
+
 int
 moveOneRedCar(int oldPosition,
               int dimRow,
@@ -595,9 +613,11 @@ moveOneRedCar(int oldPosition,
 }
 
 
-/* checkIsCarPositionTaken:
-   This function checks to see if there is currently a car in the position.
-*/
+/****************************************************************************/
+/*  checkIsCarPositionTaken:                                                */
+/* This function checks to see if there is currently a car in the position. */
+/****************************************************************************/
+
 int
 checkIsCarPositionTaken(int positionToCheck,
                         int numCarsInArray,
@@ -618,9 +638,10 @@ checkIsCarPositionTaken(int positionToCheck,
 
 }
 
-/* setArray: This is a helper function that is used to set the values
-   from one array to another array.
-*/
+  /**********************************************************************/
+  /* setArray: This is a helper function that is used to set the values */
+  /*  from one array to another array.                                  */
+  /**********************************************************************/
 void 
 setArray(int arraySize, int *arrayToUpdate, int *arrayWithValues) 
 { 
@@ -633,11 +654,11 @@ setArray(int arraySize, int *arrayToUpdate, int *arrayWithValues)
 
 
 
-/* updateManyStepsCRoutine: This function will just loop over
-   updateBlueCarsCRoutine and updateRedCarsCRoutine for numsteps
-   times.  It will start with the bluecars first each time.
-*/
-
+/*****************************************************************/
+/* updateManyStepsCRoutine: This function will just loop over    */
+/* updateBlueCarsCRoutine and updateRedCarsCRoutine for numsteps */
+/* times.  It will start with the bluecars first each time.      */
+/*****************************************************************/
 void
 updateManyStepsCRoutine(int dimRow, int dimCol,
                         int numBluecars, int *bluecars,
@@ -697,8 +718,9 @@ updateManyStepsCRoutine(int dimRow, int dimCol,
 library(schanBMLgrid)
 
 #########################################################################
-## First set of tests to see if the bluecars and redcars work with the
-## C updates.
+## First set of tests to see if the bluecars and redcars work with the ##
+## C updates.                                                          ##
+#########################################################################
 firstTest = FALSE
 
 if (firstTest) {
@@ -723,10 +745,12 @@ if (firstTest) {
 }
 
 
-#########################################################################
-## Here is a funtion to test if the C routine returns the same values
-## as the R function.  It updates blue and red each two times and
-## checks if each result is equivalent for R and C
+
+########################################################################
+## Here is a funtion to test if the C routine returns the same values ##
+## as the R function.  It updates blue and red each two times and     ##
+## checks if each result is equivalent for R and C                    ##
+########################################################################
 testRandomGrid = function(seed) {
 
     ## generate a random grid
@@ -770,14 +794,18 @@ testRandomGrid = function(seed) {
 
 }
 
+
+#####################################################################
+## Show that the results from updating with C is equivalent to the ##
+## results from updating in R.                                     ##
+#####################################################################
 testRandomResult =sapply(1:100,testRandomGrid)
-## Show that the results from updating with C is equivalent to the
-## results from updating in R.
 
 
-######################################################################
-## Here is a function to test if the multistep grid function for C
-## works.
+#####################################################################
+## Here is a function to test if the multistep grid function for C ##
+## works.                                                          ##
+#####################################################################
 testRandomGridManySteps = function(seed) {
 
     ## generate a random grid
@@ -792,8 +820,9 @@ testRandomGridManySteps = function(seed) {
     grid = generateBMLgrid(dim[1],dim[2],numCars[1],numCars[2])
 
     ## update the grid manySteps
-    gridUpdateR = updateManySteps(grid,numSteps)
     gridUpdateC = updateManyStepsWithC(grid,numSteps)
+    gridUpdateR = updateManySteps(grid,numSteps)
+
 
     ## check if the grids are the same
     identical(gridUpdateR,gridUpdateC)
@@ -801,7 +830,9 @@ testRandomGridManySteps = function(seed) {
 
 testRandomGridManyStepsResult = sapply(1:100,testRandomGridManySteps)
 
-## do profiling
+##################
+## do profiling ##
+##################
 Rprof("Rprof.out")
 profileRandomGridManySteps = sapply(1:20,testRandomGridManySteps)
 Rprof(NULL)

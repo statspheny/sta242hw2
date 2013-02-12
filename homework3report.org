@@ -12,8 +12,8 @@ I tested the C functions to check that they would give equivalent
 results as the methods in R.  These tests were done using a randomized
 grid with random dimensions and random number of cars.  I did this 100
 times and each time compared the result from C with the result from
-the previous function in R.  After the first two tries, the two
-functions returned the same grid.
+the previous function in R.  Each time, the two functions returned the
+same grid.
 
 * Check Rprofile for runtime
 

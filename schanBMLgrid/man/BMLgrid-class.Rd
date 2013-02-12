@@ -2,14 +2,14 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{BMLgrid-class}
-\alias{as.data.frame,BMLgrid-method}
-\alias{bluecars,BMLgrid-method}
-\alias{getdim,BMLgrid-method}
-\alias{plot,BMLgrid-method}
-\alias{redcars,BMLgrid-method}
-\alias{summary,BMLgrid-method}
-\alias{updateBlue,BMLgrid-method}
-\alias{updateRed,BMLgrid-method}
+%\alias{as.data.frame,BMLgrid-method}
+%\alias{bluecars,BMLgrid-method}
+%\alias{getdim,BMLgrid-method}
+%\alias{plot,BMLgrid-method}
+%\alias{redcars,BMLgrid-method}
+%\alias{summary,BMLgrid-method}
+%\alias{updateBlue,BMLgrid-method}
+%\alias{updateRed,BMLgrid-method}
 
 \title{Class \code{"BMLgrid"}}
 \description{

@@ -1,5 +1,6 @@
 \name{updateRed}
 \alias{updateRed}
+\alias{updateRedWithC}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   %%  ~~function to do ... ~~
@@ -13,6 +14,7 @@
 }
 \usage{
 updateRed(obj, ...)
+updateRedWithC(obj)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -25,7 +27,9 @@ updateRed(obj, ...)
 }
 }
 \details{
-  %%  ~~ If necessary, more details than the description above ~~
+  %% ~~ If necessary, more details than the description above ~~
+  \code{updateRed} uses only R, and \code{updateRedWithC} calls C to do
+  the updating.
 }
 \value{
   A \code{BMLgrid} object with all the red cars updated.
@@ -50,7 +54,8 @@ updateRed(obj, ...)
 
 \seealso{
   %% ~~objects to See Also as \code{\link{help}}, ~~~
-  \code{\link{updateBlue}},\code{\link{updateManySteps}}
+  \code{\link{updateBlue}}, \code{\link{updateBlueWithC}},
+  \code{\link{updateManySteps}}, \code{\link{updateManyStepsWithC}}
 }
 \examples{
 

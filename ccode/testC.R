@@ -3,8 +3,9 @@
 library(schanBMLgrid)
 
 #########################################################################
-## First set of tests to see if the bluecars and redcars work with the
-## C updates.
+## First set of tests to see if the bluecars and redcars work with the ##
+## C updates.                                                          ##
+#########################################################################
 firstTest = FALSE
 
 if (firstTest) {
@@ -29,10 +30,12 @@ if (firstTest) {
 }
 
 
-#########################################################################
-## Here is a funtion to test if the C routine returns the same values
-## as the R function.  It updates blue and red each two times and
-## checks if each result is equivalent for R and C
+
+########################################################################
+## Here is a funtion to test if the C routine returns the same values ##
+## as the R function.  It updates blue and red each two times and     ##
+## checks if each result is equivalent for R and C                    ##
+########################################################################
 testRandomGrid = function(seed) {
 
     ## generate a random grid
@@ -76,14 +79,18 @@ testRandomGrid = function(seed) {
 
 }
 
+
+#####################################################################
+## Show that the results from updating with C is equivalent to the ##
+## results from updating in R.                                     ##
+#####################################################################
 testRandomResult =sapply(1:100,testRandomGrid)
-## Show that the results from updating with C is equivalent to the
-## results from updating in R.
 
 
-######################################################################
-## Here is a function to test if the multistep grid function for C
-## works.
+#####################################################################
+## Here is a function to test if the multistep grid function for C ##
+## works.                                                          ##
+#####################################################################
 testRandomGridManySteps = function(seed) {
 
     ## generate a random grid
@@ -108,7 +115,9 @@ testRandomGridManySteps = function(seed) {
 
 testRandomGridManyStepsResult = sapply(1:100,testRandomGridManySteps)
 
-## do profiling
+##################
+## do profiling ##
+##################
 Rprof("Rprof.out")
 profileRandomGridManySteps = sapply(1:20,testRandomGridManySteps)
 Rprof(NULL)

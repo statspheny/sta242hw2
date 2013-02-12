@@ -1,5 +1,6 @@
 \name{updateManySteps}
 \alias{updateManySteps}
+\alias{updateManyStepsWithC}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
   %%  ~~function to do ... ~~
@@ -13,7 +14,8 @@
   
 }
 \usage{
-updateManySteps(obj, numsteps, video = FALSE)
+updateManySteps(obj, numSteps, video = FALSE)
+updateManyStepsWithC(obj,numSteps)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,7 +23,7 @@ updateManySteps(obj, numsteps, video = FALSE)
     %%     ~~Describe \code{obj} here~~
     \code{BMLgrid} object with cars to move.
 }
-  \item{numsteps}{
+  \item{numSteps}{
     %%     ~~Describe \code{numsteps} here~~
     The number of steps to move the cars.
 }
@@ -32,7 +34,13 @@ updateManySteps(obj, numsteps, video = FALSE)
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+  %%  ~~ If necessary, more details than the description above ~~
+  \code{updateManySteps} uses R and has potential for a video.
+  \code{updateManyStepsWithC} calls C to do the updating and returns the
+  object with the new red and blue car positions.  Both functions start
+  updating with the blue cars first.  If the first update step should be
+  with the red cars, then first call \code{updateRed} and then call
+  \code{updateManySteps}.  
 }
 \value{
   The updated \code{BMLgrid} object after updating several steps.
@@ -57,7 +65,8 @@ updateManySteps(obj, numsteps, video = FALSE)
 
 \seealso{
   %% ~~objects to See Also as \code{\link{help}}, ~~~
-  \code{\link{updateBlue}},\code{\link{updateRed}}
+  \code{\link{updateBlue}}, \code{\link{updateBlueWithC}},
+  \code{\link{updateRed}}, \code{\link{updateRedWithC}}
 }
 \examples{
 

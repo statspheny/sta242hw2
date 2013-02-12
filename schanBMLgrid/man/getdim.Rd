@@ -20,11 +20,13 @@ getdim(obj)
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+  %%  ~~ If necessary, more details than the description above ~~
+  This function returns the dimension as a length two vector of integers
+  representing the number of rows and number of columns in the
+  \code{BMLgrid} class.
 }
 \value{
-  Length 2 vector for integers representing the number of rows and
-  number of columns in the \code{BMLgrid} class.
+  length two integer vector for numRow and numCol
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}

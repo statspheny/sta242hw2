@@ -211,11 +211,11 @@ setArray(int arraySize, int *arrayToUpdate, int *arrayWithValues)
 
 
 
-/* updateManyStepsCRoutine: This function will just loop over
-   updateBlueCarsCRoutine and updateRedCarsCRoutine for numsteps
-   times.  It will start with the bluecars first each time.
-*/
-
+/*****************************************************************/
+/* updateManyStepsCRoutine: This function will just loop over	 */
+/* updateBlueCarsCRoutine and updateRedCarsCRoutine for numsteps */
+/* times.  It will start with the bluecars first each time.		 */
+/*****************************************************************/
 void
 updateManyStepsCRoutine(int dimRow, int dimCol,
 						int numBluecars, int *bluecars,

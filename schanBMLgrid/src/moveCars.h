@@ -96,8 +96,6 @@ int moveOneRedCar(int oldPosition,
 /*****************************************************************/
 /*   Check if there is currently a car in the given position.    */
 /*****************************************************************/
-*/
-
 int checkIsCarPositionTaken(int positionToCheck,
 							int numCarsInArray,
 							int *carArray);

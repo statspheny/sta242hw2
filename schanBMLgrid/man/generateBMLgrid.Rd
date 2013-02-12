@@ -74,8 +74,8 @@ function (nrow, ncol, nred, nblue)
     cars = sample(1:n, ncars)
     redcars = sample(cars, nred)
     bluecars = cars[!(cars \%in\% redcars)]
-    obj = new("BMLgrid", dim = as.integer(c(nrow, ncol)), redcars = redcars, 
-        bluecars = bluecars)
+    obj = new("BMLgrid", dim = as.integer(c(nrow, ncol)),
+        redcars = redcars, bluecars = bluecars)
     return(obj)
   }
 }
