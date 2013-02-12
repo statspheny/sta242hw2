@@ -1,5 +1,5 @@
-#dyn.load("RMoveCars.so")
-is.loaded("RupdateBlueCarsCRoutine")
+##  dyn.load("RMoveCars.so")
+## is.loaded("RupdateBlueCarsCRoutine")
 ## if(!is.loaded("RupdateBlueCarsCRoutine") {
 ##     error("RupdateBlueCarsCRoutine not loaded")
 ## }
