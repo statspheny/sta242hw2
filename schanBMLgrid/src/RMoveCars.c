@@ -1,6 +1,7 @@
-/*
-  This is the file of wrappers for all the functions in order to pass the correct values to R.
- */
+/***********************************************************************
+ * This is the file of wrappers for all the functions in order to pass *
+ * the correct values to R.                                            *
+ ***********************************************************************/
 #include "moveCars.h"
 
 void

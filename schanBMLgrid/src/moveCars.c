@@ -1,30 +1,35 @@
-////////////////////////////////////////////////////////////////////////////////
-// This file contains the following functions to move the cars
-// void updateBlueCarsCRoutine
-// void updateRedCarsCRoutine
-// int moveOneBlueCar
-// int moveOneRedCar
-// int checkIsCarPositionTake
-// void setArray
-// void updateManyStepsCRoutine
+
+/***************************************************************/
+/* This file contains the following functions to move the cars */
+/* void updateBlueCarsCRoutine								   */
+/* void updateRedCarsCRoutine								   */
+/* int moveOneBlueCar										   */
+/* int moveOneRedCar										   */
+/* int checkIsCarPositionTake								   */
+/* void setArray											   */
+/* void updateManyStepsCRoutine								   */
+/***************************************************************/
 
 #include "moveCars.h"
 #include <stdbool.h>
 
-////////////////////////////////////////////////////////////////////////////////
-// header files for private functions
+ /**************************************/
+ /* header files for private functions */
+ /**************************************/
 
 void
 setArray(int arraySize, int *arrayToUpdate, int *arrayWithValues);
 
 
-////////////////////////////////////////////////////////////////////////////////
-// Beginning of code
+ /*********************/
+ /* Beginning of code */
+ /*********************/
 
   
-/*  The function will change the values inside newBluecars to reflect
-	the changes of the new blue cars.
-*/
+/***************************************************************************/
+/*   The function will change the values inside newBluecars to reflect	   */
+/* 	the changes of the new blue cars.									   */
+/***************************************************************************/
 void
 updateBlueCarsCRoutine(int dimRow, 
 					   int dimCol,
@@ -53,10 +58,10 @@ updateBlueCarsCRoutine(int dimRow,
 }
 
 
-/* This function will update all the redcars and place the new
-   locations of the cars in the array newRedcars.
-*/
-
+ /***************************************************************/
+ /* This function will update all the redcars and place the new */
+ /* locations of the cars in the array newRedcars.			    */
+ /***************************************************************/
 void
 updateRedCarsCRoutine(int dimRow, 
 					  int dimCol,
@@ -78,9 +83,11 @@ updateRedCarsCRoutine(int dimRow,
 
 
 
-/* function to move a single blue car according to the rules.
-   This function returns the new location of the car as an integer.
- */
+ /**********************************************************************/
+ /* function to move a single blue car according to the rules.		   */
+ /*   This function returns the new location of the car as an integer. */
+ /**********************************************************************/
+
 int
 moveOneBlueCar(int oldPosition,
 			   int dimRow,
@@ -117,10 +124,12 @@ moveOneBlueCar(int oldPosition,
 
 
 
-/* function to move a single red car according to the rules.  This
-   function returns the new location of the car as an integer. 
-   This function is called by updateRedCarsCRoutine.
-*/
+ /*******************************************************************/
+ /* function to move a single red car according to the rules.  This */
+ /* function returns the new location of the car as an integer.     */
+ /* This function is called by updateRedCarsCRoutine.			    */
+ /*******************************************************************/
+
 int
 moveOneRedCar(int oldPosition,
 			  int dimRow,
@@ -161,9 +170,11 @@ moveOneRedCar(int oldPosition,
 }
 
 
-/* checkIsCarPositionTaken:
-   This function checks to see if there is currently a car in the position.
-*/
+/****************************************************************************/
+/*  checkIsCarPositionTaken:											    */
+/* This function checks to see if there is currently a car in the position. */
+/****************************************************************************/
+
 int
 checkIsCarPositionTaken(int positionToCheck,
 						int numCarsInArray,
@@ -184,9 +195,10 @@ checkIsCarPositionTaken(int positionToCheck,
 
 }
 
-/* setArray: This is a helper function that is used to set the values
-   from one array to another array.
-*/
+  /**********************************************************************/
+  /* setArray: This is a helper function that is used to set the values */
+  /*  from one array to another array.								    */
+  /**********************************************************************/
 void 
 setArray(int arraySize, int *arrayToUpdate, int *arrayWithValues) 
 { 
