@@ -1,4 +1,4 @@
-source("RMoveCars.R")
+## source("RMoveCars.R")
 
 library(schanBMLgrid)
 
@@ -34,6 +34,8 @@ if (firstTest) {
 ## as the R function.  It updates blue and red each two times and
 ## checks if each result is equivalent for R and C
 testRandomGrid = function(seed) {
+
+    ## generate a random grid
     ## print(seed)
     set.seed(seed)
     dim = sample(2:100,2)
@@ -43,11 +45,13 @@ testRandomGrid = function(seed) {
     grid = generateBMLgrid(dim[1],dim[2],numCars[1],numCars[2])
     ## summary(grid)
 
+    ## update the grid using R
     gridR1 = updateBlue(grid)
     gridR2 = updateRed(gridR1)
     gridR3 = updateBlue(gridR2)
     gridR4 = updateRed(gridR3)
 
+    ## update the grid using C
     gridC1 = updateBlueWithC(grid)
     gridC2 = updateRedWithC(gridC1)
     gridC3 = updateBlueWithC(gridC2)
@@ -67,6 +71,7 @@ testRandomGrid = function(seed) {
     ## print(paste("R3=C3",identical(gridR3,gridC3)))
     ## print(paste("R4=C4",identical(gridR4,gridC4)))
 
+    ## check if the R and C grids are the same
     identical(gridR1,gridC1) & identical(gridR2,gridC2) & identical(gridR3,gridC3) & identical(gridR4,gridC4)
 
 }
@@ -79,7 +84,35 @@ testRandomResult =sapply(1:100,testRandomGrid)
 ######################################################################
 ## Here is a function to test if the multistep grid function for C
 ## works.
+testRandomGridManySteps = function(seed) {
 
+    ## generate a random grid
+    set.seed(seed)
+    numSteps = sample(1:1000,1)
+    ## print(numSteps)
+
+    dim = sample(2:100,2)
+    size = prod(dim)
+    numCars = sample(1:(size/2),2)
+    
+    grid = generateBMLgrid(dim[1],dim[2],numCars[1],numCars[2])
+
+    ## update the grid manySteps
+    gridUpdateC = updateManyStepsWithC(grid,numSteps)
+    gridUpdateR = updateManySteps(grid,numSteps)
+
+
+    ## check if the grids are the same
+    identical(gridUpdateR,gridUpdateC)
+}
+
+testRandomGridManyStepsResult = sapply(1:100,testRandomGridManySteps)
+
+## do profiling
+Rprof("Rprof.out")
+profileRandomGridManySteps = sapply(1:20,testRandomGridManySteps)
+Rprof(NULL)
+summaryRprof("Rprof.out")
 
 
     
