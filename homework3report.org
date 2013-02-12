@@ -1,0 +1,147 @@
+#+TITLE: Homework 3
+#+AUTHOR: Stephanie Chan
+
+
+* Create C Routines
+The code for the C Routines are given in the Appendix.  There are
+three main functions: ~RupdateBlueCarsCRoutine~, ~RupdateRedCarsCRoutine~,
+~RupdateManyStepsCRoutine~.  These use the ~.C~ function call from R.
+
+* Test the C Routines
+I tested the C functions to check that they would give equivalent
+results as the methods in R.  These tests were done using a randomized
+grid with random dimensions and random number of cars.  I did this 100
+times and each time compared the result from C with the result from
+the previous function in R.  After the first two tries, the two
+functions returned the same grid.
+
+* Check Rprofile for runtime
+
+I used the same random function that was used before to check the
+runtime.  I used Rprofile, and a random sampled number of steps to run
+each time for twenty times.  Surprisingly, the R function ran faster
+than the C function.  The C function is named ~updateManyStepsWithC~
+and the R function is ~updateManySteps~.  The total amount of time
+spent in the C function was 17.82 while the total amount of time in
+the optimized R function was 10.08.  The total function sampling time
+is 28.  This may be because the ~updateManySteps~ function is
+optimized and uses mostly vector addition, subtraction and matching in
+order to update the cars.
+
+#+BEGIN_EXAMPLE
+
+> summaryRprof("Rprof.out")
+$by.self
+                      self.time self.pct total.time total.pct
+".C"                      17.82    63.64      17.82     63.64
+"match"                    2.10     7.50       2.22      7.93
+"updateRed"                1.52     5.43       4.08     14.57
+"updateBlue"               1.00     3.57       5.82     20.79
+"loadMethod"               0.84     3.00       1.48      5.29
+"assign"                   0.64     2.29       0.64      2.29
+"standardGeneric"          0.62     2.21       9.88     35.29
+"=="                       0.38     1.36       0.38      1.36
+"slot<-"                   0.32     1.14       1.24      4.43
+"dim"                      0.32     1.14       0.32      1.14
+"as.integer"               0.28     1.00       0.28      1.00
+"%in%"                     0.22     0.79       2.40      8.57
+".getClassFromCache"       0.22     0.79       0.22      0.79
+"checkSlotAssignment"      0.18     0.64       0.92      3.29
+"el"                       0.18     0.64       0.18      0.64
+"*"                        0.14     0.50       0.14      0.50
+"+"                        0.14     0.50       0.14      0.50
+".identC"                  0.14     0.50       0.14      0.50
+"@<-"                      0.12     0.43       1.36      4.86
+"getClass"                 0.12     0.43       0.32      1.14
+">"                        0.12     0.43       0.12      0.43
+"c"                        0.12     0.43       0.12      0.43
+"-"                        0.10     0.36       0.10      0.36
+"updateManySteps"          0.08     0.29      10.08     36.00
+"checkIfCarStuck"          0.06     0.21       2.44      8.71
+"elNamed"                  0.06     0.21       0.28      1.00
+"%%"                       0.06     0.21       0.06      0.21
+"doTryCatch"               0.04     0.14       0.04      0.14
+"bluecars"                 0.02     0.07       0.66      2.36
+"redcars"                  0.02     0.07       0.52      1.86
+"rev"                      0.02     0.07       0.02      0.07
+
+$by.total
+                       total.time total.pct self.time self.pct
+"FUN"                       28.00    100.00      0.00     0.00
+"la*pply"                    28.00    100.00      0.00     0.00
+"sapply"                    28.00    100.00      0.00     0.00
+".C"                        17.82     63.64     17.82    63.64
+"updateManyStepsWithC"      17.82     63.64      0.00     0.00
+"updateManySteps"           10.08     36.00      0.08     0.29
+"standardGeneric"            9.88     35.29      0.62     2.21
+"updateBlue"                 5.82     20.79      1.00     3.57
+"updateRed"                  4.08     14.57      1.52     5.43
+"checkIfCarStuck"            2.44      8.71      0.06     0.21
+"%in%"                       2.40      8.57      0.22     0.79
+"match"                      2.22      7.93      2.10     7.50
+"loadMethod"                 1.48      5.29      0.84     3.00
+"@<-"                        1.36      4.86      0.12     0.43
+"slot<-"                     1.24      4.43      0.32     1.14
+"checkSlotAssignment"        0.92      3.29      0.18     0.64
+"bluecars"                   0.66      2.36      0.02     0.07
+"assign"                     0.64      2.29      0.64     2.29
+"redcars"                    0.52      1.86      0.02     0.07
+"=="                         0.38      1.36      0.38     1.36
+"dim"                        0.32      1.14      0.32     1.14
+"getClass"                   0.32      1.14      0.12     0.43
+"as.integer"                 0.28      1.00      0.28     1.00
+"elNamed"                    0.28      1.00      0.06     0.21
+".getClassFromCache"         0.22      0.79      0.22     0.79
+"el"                         0.18      0.64      0.18     0.64
+"*"                          0.14      0.50      0.14     0.50
+"+"                          0.14      0.50      0.14     0.50
+".identC"                    0.14      0.50      0.14     0.50
+">"                          0.12      0.43      0.12     0.43
+"c"                          0.12      0.43      0.12     0.43
+"-"                          0.10      0.36      0.10     0.36
+"generateBMLgrid"            0.10      0.36      0.00     0.00
+"initialize"                 0.08      0.29      0.00     0.00
+"new"                        0.08      0.29      0.00     0.00
+"validObject"                0.08      0.29      0.00     0.00
+"%%"                         0.06      0.21      0.06     0.21
+"doTryCatch"                 0.04      0.14      0.04     0.14
+"try"                        0.04      0.14      0.00     0.00
+"tryCatch"                   0.04      0.14      0.00     0.00
+"tryCatchList"               0.04      0.14      0.00     0.00
+"tryCatchOne"                0.04      0.14      0.00     0.00
+"rev"                        0.02      0.07      0.02     0.07
+"getClassDef"                0.02      0.07      0.00     0.00
+"is"                         0.02      0.07      0.00     0.00
+
+$sample.interval
+[1] 0.02
+
+$sampling.time
+[1] 28
+
+#+END_EXAMPLE
+
+* Appendix
+
+** RMoveCars.R
+   This file contains the three new functions that called the C routines
+   to update the positions of the cars.
+#+INCLUDE: "schanBMLgrid/R/RMoveCars.R" src R
+
+** RMoveCars.c
+   This file contains the wrappers for the C routines that were called
+   by R.
+#+INCLUDE: "schanBMLgrid/src/RMoveCars.c" src C
+
+** moveCars.h
+   This is the header file that contained the functions in ~moveCars.c~.
+#+INCLUDE: "schanBMLgrid/src/moveCars.h" src C
+
+** moveCars.c
+   This is the file that contains the code to move the cars.
+#+INCLUDE: "schanBMLgrid/src/moveCars.c" src C
+
+** testC.R
+   This file contains all the code I used to test the package and the
+   C functions.
+#+INCLUDE: "ccode/testC.R" src R
